@@ -412,7 +412,7 @@ public class Utils {
 
 		clearCache();
 
-		deleteAllPictures();
+		deleteAllAppFiles();
 
 		File file = new File(context.getFilesDir(), Constants.CONFIG_FILE);
 		file.delete();
@@ -448,13 +448,13 @@ public class Utils {
 
 			if(typedHash!=null && storedHash!=null && (typedHash.equals(storedHash))){
 				ret = 1;
-				if(countPanic+1 == cfg.getPanicNumber()) deleteAllPictures();
+				if(countPanic+1 == cfg.getPanicNumber()) deleteAllAppFiles();
 			}
 		}
 		return ret;
 	}
 
-	private void deleteAllPictures() {
+	private void deleteAllAppFiles() {
 		String yapeaDir = getAppContentDir();
 
 		File imageDir = new File(yapeaDir);
