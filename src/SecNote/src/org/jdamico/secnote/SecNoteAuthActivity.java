@@ -100,4 +100,10 @@ public class SecNoteAuthActivity extends Activity {
 			return super.onOptionsItemSelected(item);
 		}
 	}
+	
+	@Override
+	public void onBackPressed() {
+	    moveTaskToBack(true);
+	}
+
 }
