@@ -37,9 +37,9 @@ import javax.crypto.spec.SecretKeySpec;
 
 import org.jdamico.secnote.commons.AppMessages;
 import org.jdamico.secnote.commons.Constants;
+import org.jdamico.secnote.commons.SecNoteException;
 import org.jdamico.secnote.commons.StaticObj;
 import org.jdamico.secnote.commons.Utils;
-import org.jdamico.secnote.commons.SecNoteException;
 import org.jdamico.secnote.dataobjects.CryptoAlgoObj;
 
 import android.content.Context;

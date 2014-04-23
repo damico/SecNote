@@ -24,7 +24,6 @@ import org.jdamico.secnote.commons.SecNoteException;
 import org.jdamico.secnote.commons.Utils;
 import org.jdamico.secnote.dataobjects.NoteItemObj;
 
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;

@@ -30,7 +30,7 @@ public interface Constants {
 	public static final String TIMESTAMP_FORMAT = "yyyyMMMdd_HH_mm_ss";
 	public static final String XML_CONFIG_KEY_PANICPASSWD_ATTRIB = "panicPasswd";
 	public static final String XML_CONFIG_KEY_PANICNUMBER_ATTRIB = "panicNumber";
-	public static final String VERSION = "0.1";
+	public static final String VERSION = "0.2";
 	public static final String APP_NAME = XML_CONFIG_ROOT_TAG;
 
 }

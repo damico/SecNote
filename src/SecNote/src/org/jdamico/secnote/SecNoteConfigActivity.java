@@ -19,11 +19,10 @@ package org.jdamico.secnote;
 import java.io.File;
 
 import org.jdamico.secnote.commons.AppMessages;
-import org.jdamico.secnote.commons.Utils;
 import org.jdamico.secnote.commons.SecNoteException;
+import org.jdamico.secnote.commons.Utils;
 import org.jdamico.secnote.crypto.CryptoUtils;
 import org.jdamico.secnote.dataobjects.ConfigObj;
-import org.jdamico.secnote.R;
 
 import android.app.Activity;
 import android.app.AlertDialog;

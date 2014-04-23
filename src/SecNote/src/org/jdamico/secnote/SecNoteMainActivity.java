@@ -17,6 +17,7 @@ package org.jdamico.secnote;
  */
 
 import java.io.File;
+import java.security.Policy;
 
 import org.jdamico.secnote.commons.AppMessages;
 import org.jdamico.secnote.commons.Constants;
@@ -30,6 +31,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.provider.Settings.Secure;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -38,12 +41,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-/*
 import com.google.android.vending.licensing.AESObfuscator;
 import com.google.android.vending.licensing.LicenseChecker;
 import com.google.android.vending.licensing.LicenseCheckerCallback;
 import com.google.android.vending.licensing.ServerManagedPolicy;
-*/
+
 
 public class SecNoteMainActivity extends Activity {
 
@@ -54,14 +56,14 @@ public class SecNoteMainActivity extends Activity {
 	TextView chachedMemTv = null;
 	String key = null;
 	
-	private static final String BASE64_PUBLIC_KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAgtYOOhJn7JiHawr6kcrgGCoOuWB5brE6EB/2r478mrf1atO5fmXODR4wAKWqIo7s3IjLm16Nm+MaoFhRyYDMohSmNMJR3zjj3h+C1jhaBVKOgq50Sqc2V+SAY8kCkBJhZAhmL8euFt4ntv3ykkYNdPMo9182autvPgxWlIFfN674Hv47u/ghhUAH0ZPThBsCKWZM43DOcAuWZ3DF2HCZ+Z3V2KLM7RpwR+/yGDMq71vW5qStHgl25jZ8yjqpFt7H51Az1Ug/5TqL/a2wI12vaQJ7ArWZIA0rYzq/TONmHm/qqmocmUFjpGVV5/jgRs+8hTYRSgIfkX9ywBu7WpYGdwIDAQAB";
-	private static final byte[] SALT = new byte[] { 111, -41, -62, 12, 114, -121, -125, -26, -38, -31, 42, 14, 115, 17, -81, 75, 75, 53, -5, 115 };
+	private static final String BASE64_PUBLIC_KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAh4Hmo6elwQ5R+XKrrAW6fqQM+fpNKUsHzNhQbQkW7P9aMcFLRAWfZoS9TPdjhknZPzgQvrHlLyrU4jO3523rdQ1up5ODJPi4q5GgpOF0+asdqD9xBzwlnrORhjIPxM4kjSEQcVRToqA/6zD6wmgHYyrkUcXDJKwvsU877Ee4XUaAqc0qCD1gdfgt0lzIs6c8leNOn/qsP4gUc793yAQzYZBbTII1+oeS/MZHaOXjTMNrTm642RFHEl0FPi86JZ7x9jjmgHRg/ZyXamI6uiJaxmOl2jTyrBrftyP3TU+IocQXoyDX2XEpwyfGtfTuce1AGJ6Jb54vk/VT8e1vfst7pwIDAQAB";
+	private static final byte[] SALT = new byte[] { 111, -41, -61, 12, 114, -121, -125, -26, -38, -31, 42, 14, 115, 17, -81, 75, 75, 53, -5, 115 };
 	
-	/*
+	
 	private LicenseCheckerCallback mLicenseCheckerCallback;
     private LicenseChecker mChecker;
     private Handler mHandler;
-    */
+    
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -70,13 +72,13 @@ public class SecNoteMainActivity extends Activity {
 		
 		chachedMemTv = (TextView) findViewById(R.id.mem_key_textView);
 
-		/*
+		
 		mHandler = new Handler();
 		mLicenseCheckerCallback = new MyLicenseCheckerCallback();
 		String android_id = Secure.getString(this.getContentResolver(), Secure.ANDROID_ID);
         mChecker = new LicenseChecker(this, new ServerManagedPolicy(this, new AESObfuscator(SALT, getPackageName(), android_id)), BASE64_PUBLIC_KEY);
         doCheck();
-		*/
+		
 		
 		try {
 			key = CryptoUtils.getInstance().retrieveKeyFromCache(getApplicationContext());
@@ -170,11 +172,11 @@ public class SecNoteMainActivity extends Activity {
 		});
 
 	}
-/*
+
 	private void doCheck() {
         mChecker.checkAccess(mLicenseCheckerCallback);
 	}
-*/
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		menu.add(AppMessages.getInstance().getMessage("GLOBAL.about"));
@@ -261,10 +263,10 @@ public class SecNoteMainActivity extends Activity {
 	
 	@Override
     protected void onDestroy() {
-        super.onDestroy();
-       // mChecker.onDestroy();
+       super.onDestroy();
+       mChecker.onDestroy();
     }
-	/*
+	
 	private void displayResult(final String result) {
         mHandler.post(new Runnable() {
             public void run() {
@@ -275,7 +277,7 @@ public class SecNoteMainActivity extends Activity {
         });
     }
 
-	/*
+	
 	private class MyLicenseCheckerCallback implements LicenseCheckerCallback {
 	    public void allow(int reason) {
 	        if (isFinishing()) {
@@ -290,11 +292,11 @@ public class SecNoteMainActivity extends Activity {
 	        }
 	        // displayResult("No");
 	        
-//	        if (reason == Policy.RETRY) {
-//	        	System.out.println("DIALOG_RETRY");
-//	        } else {
-//	        	System.out.println("DIALOG_GOTOMARKET");
-//	        }
+	       // if (reason == Policy.RETRY) {
+	        //	System.out.println("DIALOG_RETRY");
+	       // } else {
+	        //	System.out.println("DIALOG_GOTOMARKET");
+	       // }
 	    }
 
 	    
@@ -303,5 +305,5 @@ public class SecNoteMainActivity extends Activity {
 		@Override
 		public void applicationError(int errorCode) {}
 	}
-	*/
+	
 }

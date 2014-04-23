@@ -17,7 +17,6 @@ package org.jdamico.secnote;
  */
 
 import org.jdamico.secnote.commons.AppMessages;
-import org.jdamico.secnote.R;
 
 import android.app.Activity;
 import android.content.Intent;
